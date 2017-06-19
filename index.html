@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FCC-Leaderboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body ng-app="app" ng-controller="LeaderBoardController">
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+        			FreeCodeCamp LeaderBoard
+      			</h1>
+                <h2 class="subtitle">
+        			The leaders of FreeCodeCamp over the past 30 days.
+      			</h2>
+            </div>
+        </div>
+    </section>
+    <table class="table is-striped is-narrow">
+        <thead>
+            <tr>
+                <th>
+                    <a href="#" ng-click="sortType = 'rank'; sortReverse = !sortReverse">
+                	Rank
+                	<span ng-show = "sortType == 'rank' && !sortReverse" class = "fa fa-caret-down"></span>
+                	<span ng-show = "sortType == 'rank' && sortReverse" class="fa fa-caret-up"></span>
+                	</a>
+                </th>
+                <th><a href="#" ng-click="sortType = 'username'; sortReverse = !sortReverse" ">
+                	UserName
+                	<span ng-show = "sortType=='username' && !sortReverse " class = "fa fa-caret-down "></span>
+                	<span ng-show = "sortType=='username' && sortReverse " class="fa fa-caret-up "></span>
+                	</a>
+                </th>
+                <th><a href="# " ng-click="sortType='recent' ; sortReverse=! sortReverse ""> Last 30 Days Points
+                    <span ng-show="sortType == 'recent' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'recent' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="sortType = 'alltime'; sortReverse = !sortReverse" ">
+                	All Time Points
+                	<span ng-show = "sortType=='alltime' && !sortReverse " class = "fa fa-caret-down "></span>
+                	<span ng-show = "sortType=='alltime' && sortReverse " class="fa fa-caret-up "></span>
+                	</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="leader in leaders | orderBy:sortType:sortReverse ">
+                <td>{{ leader.rank }}</td>
+                <td>
+                    <figure class="image is-32x32 ">
+                        <img ng-src="{{ leader.img }} ">
+                    </figure>{{ leader.username }}</td>
+                <td>{{ leader.recent }}</td>
+                <td>{{ leader.alltime }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js "></script>
+    <script src="./public/src/app-module.js "></script>
+    <script src="./public/src/app-controller.js "></script>
+    <script src="./public/src/app-factory.js "></script>
+</body>
+
+</html>
